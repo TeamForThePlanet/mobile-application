@@ -24,16 +24,16 @@ This application will receive notifications from Supabase, display them in a lis
 ### 2. Mobile App Foundation
 - [X] Initialize React Native project
 - [X] Set up navigation system
-- [] Create basic UI components:
+- [X] Create basic UI components:
   - Notification list
   - Notification detail view
   - Social network selection modal
 
 ### 3. Notification System Implementation
-- [ ] Set up Supabase client in the app
-- [ ] Implement real-time subscription to notifications
-- [ ] Create notification storage system
-- [ ] Build notification list UI with:
+- [X] Set up Supabase client in the app
+- [X] Implement real-time subscription to notifications
+- [X] Create notification storage system
+- [X] Build notification list UI with:
   - Message preview
   - Image thumbnail
   - Timestamp

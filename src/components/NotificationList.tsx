@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { Text, useTheme } from 'react-native-paper';
 import { NotificationItem } from './NotificationItem';
 import { Notification } from '../types/notification';
 
@@ -12,10 +13,14 @@ export const NotificationList: React.FC<NotificationListProps> = ({
   notifications,
   onNotificationPress,
 }) => {
+  const theme = useTheme();
+
   if (notifications.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No notifications yet</Text>
+        <Text style={[styles.emptyText, { color: theme.colors.placeholder }]}>
+          No notifications yet
+        </Text>
       </View>
     );
   }
@@ -48,6 +53,5 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#666',
   },
 });

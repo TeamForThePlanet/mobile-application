@@ -1,9 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { supabase, subscribeToNotifications } from './src/config/supabase';
 import { NotificationList } from './src/components/NotificationList';
 import { Notification } from './src/types/notification';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#2196F3',
+    accent: '#f1c40f',
+    background: '#f5f5f5',
+    placeholder: '#666',
+  },
+};
 
 export default function App() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -52,20 +64,22 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <NotificationList
-        notifications={notifications}
-        onNotificationPress={handleNotificationPress}
-      />
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={theme}>
+      <View style={styles.container}>
+        <NotificationList
+          notifications={notifications}
+          onNotificationPress={handleNotificationPress}
+        />
+        <StatusBar style="auto" />
+      </View>
+    </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.background,
     marginTop: 50,
   },
 });
