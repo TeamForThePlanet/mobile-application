@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
+import { View, Alert, StyleSheet, Linking } from 'react-native';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { supabase, subscribeToNotifications } from './src/config/supabase';
 import { NotificationList } from './src/components/NotificationList';
 import { Notification } from './src/types/notification';
+import 'react-native-url-polyfill/auto';
+import { handleBlueskyShare } from './src/services/handleBlueskyShare';
 
 const theme = {
   ...DefaultTheme,
@@ -19,6 +21,7 @@ const theme = {
 
 export default function App() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
 
   useEffect(() => {
     // Fetch existing notifications
@@ -55,9 +58,11 @@ export default function App() {
       'Select a platform to share this content:',
       [
         { text: 'LinkedIn', onPress: () => console.log('LinkedIn selected') },
-        { text: 'Instagram', onPress: () => console.log('Instagram selected') },
         { text: 'Facebook', onPress: () => console.log('Facebook selected') },
-        { text: 'Bluesky', onPress: () => console.log('Bluesky selected') },
+        {
+          text: 'Bluesky',
+          onPress: () => handleBlueskyShare(notification),
+        },
         { text: 'Cancel', style: 'cancel' },
       ]
     );
