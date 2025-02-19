@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { View, Alert, StyleSheet, Linking } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import { supabase, subscribeToNotifications } from './src/config/supabase';
 import { NotificationList } from './src/components/NotificationList';
 import { Notification } from './src/types/notification';
 import 'react-native-url-polyfill/auto';
 import { handleBlueskyShare } from './src/services/handleBlueskyShare';
+import { handleLinkedInShare } from './src/services/handleLinkedInShare';
 
 const theme = {
   ...DefaultTheme,
@@ -57,7 +58,10 @@ export default function App() {
       'Choose Platform',
       'Select a platform to share this content:',
       [
-        { text: 'LinkedIn', onPress: () => console.log('LinkedIn selected') },
+        { 
+          text: 'LinkedIn', 
+          onPress: () => handleLinkedInShare(notification),
+        },
         { text: 'Facebook', onPress: () => console.log('Facebook selected') },
         {
           text: 'Bluesky',

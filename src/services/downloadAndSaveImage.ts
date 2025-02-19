@@ -28,7 +28,6 @@ const checkMediaPermissions = async (): Promise<MessageResponse> => {
   };
   
   const getLocalUri = (imageUrl: string): string => {
-    console.log(imageUrl);
     const filename = imageUrl.split('/').pop() || 'image.jpg';
     return `${FileSystem.documentDirectory}${filename}.jpg`;
   };
