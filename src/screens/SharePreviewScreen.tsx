@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
-import { Surface, Text, Button, useTheme } from 'react-native-paper';
+import { StyleSheet, View, Image, ScrollView, Alert, ToastAndroid, Platform } from 'react-native';
+import { Surface, Text, Button } from 'react-native-paper';
 import { downloadAndSaveImage } from '../services/downloadAndSaveImage';
 import { handleLinkedInShare } from '../services/handleLinkedInShare';
 import { handleBlueskyShare } from '../services/handleBlueskyShare';
-import { Notification } from '../types/notification';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 
@@ -12,17 +11,21 @@ type Props = NativeStackScreenProps<RootStackParamList, 'SharePreview'>;
 
 export const SharePreviewScreen: React.FC<Props> = ({ route, navigation }) => {
   const { notification } = route.params;
-  const theme = useTheme();
 
   const handleDownload = async () => {
-    console.log('Downloading image...' + notification.image_url);
     try {
       if (notification.image_url) {
         await downloadAndSaveImage(notification.image_url);
       }
+
+      showDownloadedMessage();
     } catch (error) {
       console.error('Error downloading image:', error);
     }
+  };
+
+  const showDownloadedMessage = () => {
+    ToastAndroid.show('Image downloaded successfully!', ToastAndroid.SHORT);
   };
 
   const textPreview = notification.message.substring(0, 200);
