@@ -1,12 +1,9 @@
 import { Linking, Alert } from 'react-native';
 import { Notification } from '../types/notification';
-import { downloadAndSaveImage } from './downloadAndSaveImage';
 
 export const handleBlueskyShare = async (notification: Notification) => {
   try {
-    downloadAndSaveImage(notification.image_url);
     const encodedText = encodeURIComponent(notification.message);
-
     const mobileUrl = `bluesky://intent/compose?text=${encodedText}`;
     
     try {

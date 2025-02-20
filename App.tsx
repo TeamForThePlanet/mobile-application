@@ -1,13 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { supabase, subscribeToNotifications } from './src/config/supabase';
 import { NotificationList } from './src/components/NotificationList';
+import { SharePreviewScreen } from './src/screens/SharePreviewScreen';
 import { Notification } from './src/types/notification';
-import 'react-native-url-polyfill/auto';
+import { RootStackParamList } from './src/types/navigation';
 import { handleBlueskyShare } from './src/services/handleBlueskyShare';
 import { handleLinkedInShare } from './src/services/handleLinkedInShare';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const theme = {
   ...DefaultTheme,
@@ -20,7 +25,7 @@ const theme = {
   },
 };
 
-export default function App() {
+function HomeScreen({ navigation }: any) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
 
@@ -49,38 +54,41 @@ export default function App() {
       setNotifications(data || []);
     } catch (error) {
       console.error('Error fetching notifications:', error);
-      Alert.alert('Error', 'Failed to fetch notifications');
     }
   };
 
   const handleNotificationPress = (notification: Notification) => {
-    Alert.alert(
-      'Choose Platform',
-      'Select a platform to share this content:',
-      [
-        { 
-          text: 'LinkedIn', 
-          onPress: () => handleLinkedInShare(notification),
-        },
-        { text: 'Facebook', onPress: () => console.log('Facebook selected') },
-        {
-          text: 'Bluesky',
-          onPress: () => handleBlueskyShare(notification),
-        },
-        { text: 'Cancel', style: 'cancel' },
-      ]
-    );
+    navigation.navigate('SharePreview', { notification });
   };
 
   return (
+    <View style={styles.container}>
+      <NotificationList
+        notifications={notifications}
+        onNotificationPress={handleNotificationPress}
+      />
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+export default function App() {
+  return (
     <PaperProvider theme={theme}>
-      <View style={styles.container}>
-        <NotificationList
-          notifications={notifications}
-          onNotificationPress={handleNotificationPress}
-        />
-        <StatusBar style="auto" />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="Home" 
+            component={HomeScreen}
+            options={{ title: 'Notifications' }}
+          />
+          <Stack.Screen
+            name="SharePreview"
+            component={SharePreviewScreen}
+            options={{ title: 'Share Preview' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 }

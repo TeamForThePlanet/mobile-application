@@ -16,7 +16,6 @@ export const downloadAndSaveImage = async (imageUrl: string): Promise<MessageRes
   if (downloadStatus !== 'Success') {
     return [downloadStatus, downloadMessage];
   }
-
   return saveToGallery(localUri);
 };
 

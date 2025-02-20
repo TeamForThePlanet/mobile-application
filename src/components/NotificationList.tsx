@@ -18,7 +18,7 @@ export const NotificationList: React.FC<NotificationListProps> = ({
   if (notifications.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={[styles.emptyText, { color: theme.colors.placeholder }]}>
+        <Text style={[styles.emptyText, { color: theme.colors.onBackground }]}>
           No notifications yet
         </Text>
       </View>
