@@ -4,6 +4,7 @@ import { Surface, Text, Button } from 'react-native-paper';
 import { downloadAndSaveImage } from '../services/downloadAndSaveImage';
 import { handleLinkedInShare } from '../services/handleLinkedInShare';
 import { handleBlueskyShare } from '../services/handleBlueskyShare';
+import { handleInstagramShare } from '../services/handleInstagramShare';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 
@@ -69,6 +70,15 @@ export const SharePreviewScreen: React.FC<Props> = ({ route, navigation }) => {
           icon="share"
         >
           Share on Bluesky
+        </Button>
+
+        <Button
+          mode="contained"
+          onPress={() => handleInstagramShare(notification)}
+          style={styles.button}
+          icon="instagram"
+        >
+          Share on Instagram
         </Button>
       </View>
     </ScrollView>
