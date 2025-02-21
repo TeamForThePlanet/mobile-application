@@ -3,7 +3,7 @@ import { Notification } from '../types/notification';
 
 export const handleBlueskyShare = async (notification: Notification) => {
   try {
-    const encodedText = encodeURIComponent(notification.message);
+    const encodedText = encodeURIComponent(notification.short_message);
     const mobileUrl = `bluesky://intent/compose?text=${encodedText}`;
     
     try {

@@ -6,7 +6,7 @@ const shareUrl = `https://www.linkedin.com/shareArticle`;
 
 export const handleLinkedInShare = async (notification: Notification) => {
     try {
-        await Clipboard.setStringAsync(notification.message);
+        await Clipboard.setStringAsync(notification.long_message);
         await Linking.openURL(shareUrl);
 
         Alert.alert('Success', 'Content copied to clipboard for sharing');

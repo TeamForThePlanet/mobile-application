@@ -29,7 +29,7 @@ export const SharePreviewScreen: React.FC<Props> = ({ route, navigation }) => {
     ToastAndroid.show('Image downloaded successfully!', ToastAndroid.SHORT);
   };
 
-  const textPreview = notification.message.substring(0, 200);
+  const textPreview = notification.long_message.substring(0, 200);
 
   return (
     <ScrollView style={styles.container}>

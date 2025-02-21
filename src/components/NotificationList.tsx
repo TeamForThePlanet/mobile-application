@@ -26,7 +26,7 @@ export const NotificationList: React.FC<NotificationListProps> = ({
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <NotificationItem
-          message={item.message.substring(0, 100) + ' ...'}
+          message={item.long_message.substring(0, 100) + ' ...'}
           imageUrl={item.image_url}
           createdAt={item.created_at}
           onPress={() => onNotificationPress(item)}

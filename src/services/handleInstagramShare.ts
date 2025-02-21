@@ -8,20 +8,7 @@ import { Notification } from '../types/notification';
 export const handleInstagramShare = async (notification: Notification) => {
     try {
         // Copy message to clipboard for user to paste
-        await Clipboard.setStringAsync(notification.message);
-
-        // const canOpenInstagram = await Linking.canOpenURL('instagram://user?username=instagram');
-
-        // if (!canOpenInstagram) {
-        //     Alert.alert(
-        //         'Instagram Not Found',
-        //         'Please install Instagram to share this content.',
-        //         [
-        //             { text: 'OK' }
-        //         ]
-        //     );
-        //     return;
-        // }
+        await Clipboard.setStringAsync(notification.long_message);
 
         // Download and save the image
         const response = await fetch(notification.image_url);
