@@ -4,5 +4,4 @@ export interface Notification {
   short_message: string;
   image_url: string;
   created_at: string;
-  status: string;
 }

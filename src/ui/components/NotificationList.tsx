@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { NotificationItem } from './NotificationItem';
-import { Notification } from '../types/notification';
+import { Notification } from '../../types/notification';
 
 interface NotificationListProps {
   notifications: Notification[];

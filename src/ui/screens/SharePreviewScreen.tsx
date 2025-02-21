@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Image, ScrollView, Alert, ToastAndroid, Platform } from 'react-native';
 import { Surface, Text, Button } from 'react-native-paper';
-import { downloadAndSaveImage } from '../services/downloadAndSaveImage';
-import { handleLinkedInShare } from '../services/handleLinkedInShare';
-import { handleBlueskyShare } from '../services/handleBlueskyShare';
-import { handleInstagramShare } from '../services/handleInstagramShare';
+import { downloadAndSaveImage } from '../../services/downloadAndSaveImage';
+import { handleLinkedInShare } from '../../services/handleLinkedInShare';
+import { handleBlueskyShare } from '../../services/handleBlueskyShare';
+import { handleInstagramShare } from '../../services/handleInstagramShare';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList } from '../../types/navigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SharePreview'>;
 
